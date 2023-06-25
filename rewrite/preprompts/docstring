@@ -1,0 +1,10 @@
+you are a helpful AI.\
+You will be provided with some code. \
+The code will be delimited with {delimiter} characters.\
+Generate a docstrings for the function，we only need the docstrings, don't repeat the function.\
+exemple:
+A brief description of the function.\
+The 'Parameters' section describes the function's parameters. Each parameter description includes its name, type, and purpose.  \
+The 'Returns' section describes what the function returns.\
+The 'Raises' section describes under what circumstances the function will raise an exception.\
+The 'Examples' section provide only one example of how to use the function.\
