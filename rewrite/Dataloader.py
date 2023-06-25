@@ -101,7 +101,7 @@ class DataLoader():
                     self.function2file[function_name] = [relative_dir]
                 else:
                     self.function2file[function_name].append(relative_dir)                    
-        print(f"Data loaded from {self.working_path}")
+        print(f"Code loaded from {self.working_path}")
         
     def load_preprompts(self):
         current_file_path = os.path.dirname(os.path.abspath(__file__))
@@ -214,7 +214,7 @@ class DataLoader():
         #the first time to change the file
         success,error_info = run_test_cmd(path)
         print("################ STARTING TESTING THE CODE ################")
-        print(f"RUNNING THE TEST CODE\n   RESULT : {success}")
+        print(f"RUNNING THE TEST CODE\n   RESULT : {success}\n   ERROR_INFO : {error_info} ")
         
         while success == False: 
             print("FIXING THE CODE")
@@ -245,7 +245,7 @@ class DataLoader():
                 # find the line and change it.
                 change_line(path = os.path.join(self.working_path,relative_path),function_name = function_name,code = fixed_code)
                 
-            print("RETESTING TEH CODE AFTER FIXING IT")
+            print("################ RETESTING THE CODE ################")
             success,error_info = run_test_cmd(path)
             print(f"THE RESULT AFTER FIXTING\n   RESULT : {success}")
             
@@ -253,7 +253,7 @@ class DataLoader():
         
     def fix_code(self,test_class,info,code,test_code):
         # generate single fixed code
-        system_message = DataLoader.preprompts["fix_code"]
+        system_message = self.preprompts["fix_code"]
         messages =  [  
             {'role':'system', 
             'content': system_message},    
@@ -281,14 +281,8 @@ class DataLoader():
 if __name__ == "__main__":
     # Data = Data(code = "code",path = "./")
     # Data.show()
-        
-    # function_contents, function_calls = analyze_single_file("/home/rewrite2/gpt-engineer/test_repo/gpt_engineer/chat_to_files.py")
-    # function_name = re.search(r'def (\w+)\(', function_contents[1]).group(1)
-    # print(function_name)
-    # print(f"function_calls : {function_calls}\n")
-    # print(f"function_contents : \n{function_contents[1]}\n")
     
-    DataLoader = DataLoader(working_path = "/home/rewrite2/gpt-engineer/test_repo")
+    DataLoader = DataLoader(working_path = "/home/rewrie_code/test_repo")
     DataLoader.load_data()
     DataLoader.load_preprompts()
     
@@ -296,10 +290,6 @@ if __name__ == "__main__":
     # DataLoader.get_test_code() # generate the test code
     # DataLoader.save_test_code() # save the test code to file
     DataLoader.run_test_code()
-    # for data in DataLoader.data_list:
-        # function_name = data.get_attribute(attribute_name = "function_name")
-        # docstring = data.get_attribute(attribute_name = "description")
-        # print(f"##################{function_name}##################:  \n{docstring}")
 
     
         

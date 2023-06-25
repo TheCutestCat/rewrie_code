@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/rewrite2/gpt-engineer/test_repo/')
+sys.path.append('/home/rewrie_code/test_repo')
 import unittest
 from func import add
 
